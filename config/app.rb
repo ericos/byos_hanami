@@ -8,7 +8,6 @@ require_relative "initializers/rack_attack"
 module Terminus
   # The application base configuration.
   class App < Hanami::App
-    config.environment = :development
     # :nocov:
     RubyVM::YJIT.enable if defined? RubyVM::YJIT
     # :nocov:
