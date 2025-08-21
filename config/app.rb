@@ -33,7 +33,7 @@ module Terminus
       csp[:script_src] += " 'unsafe-eval' 'unsafe-inline' https://unpkg.com/"
     end
 
-    config.middleware.use Rack::Attack
+    # config.middleware.use Rack::Attack
     config.middleware.use Rack::Deflater
     config.middleware.use :body_parser, :json
 
