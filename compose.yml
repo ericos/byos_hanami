@@ -19,8 +19,7 @@ services:
       database:
         condition: service_healthy
     labels:
-      - "traefik.http.middlewares.auth.basicauth.users=${BASIC_AUTH_USERS}"
-      - "traefik.http.routers.web.middlewares=auth"
+      - 'traefik.http.middlewares.mybasicauth.basicauth.users=${BASIC_AUTH_USERS}'
     deploy:
       resources:
         limits:
