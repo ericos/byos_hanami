@@ -20,6 +20,7 @@ services:
         condition: service_healthy
     labels:
       - 'traefik.http.middlewares.mybasicauth.basicauth.users=${BASIC_AUTH_USERS}'
+      - 'traefik.http.routers.terminus-web.middlewares=mybasicauth'
     deploy:
       resources:
         limits:
