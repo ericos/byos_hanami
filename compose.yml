@@ -19,6 +19,16 @@ services:
       database:
         condition: service_healthy
     labels:
+      # --- NEW --- Tells Traefik to manage this container
+      - 'traefik.enable=true'
+      # --- NEW --- The routing rule. Coolify provides the FQDN variable automatically.
+      - 'traefik.http.routers.terminus-web.rule=Host(`${COOLIFY_FQDN}`)'
+      # --- NEW --- Tells Traefik to use the secure (HTTPS) entrypoint.
+      - 'traefik.http.routers.terminus-web.entrypoints=websecure'
+      # --- NEW --- Tells Traefik which port your app uses INSIDE the container.
+      - 'traefik.http.services.terminus-web.loadbalancer.server.port=${HANAMI_PORT}'
+
+      # --- Your existing labels ---
       - 'traefik.http.middlewares.mybasicauth.basicauth.users=${BASIC_AUTH_USERS}'
       - 'traefik.http.routers.terminus-web.middlewares=mybasicauth'
     deploy:
